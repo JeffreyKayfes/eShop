@@ -1,4 +1,5 @@
-﻿var builder = WebApplication.CreateBuilder(args);
+﻿// Test commit for github
+var builder = WebApplication.CreateBuilder(args);
 
 builder.AddBasicServiceDefaults();
 builder.AddApplicationServices();
