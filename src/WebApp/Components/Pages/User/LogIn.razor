@@ -2,20 +2,76 @@
 @inject NavigationManager Nav
 @attribute [Authorize]
 @code {
-    [SupplyParameterFromQuery]
-    public string? ReturnUrl { get; set; }
+	[SupplyParameterFromQuery]
+	public string? ReturnUrl { get; set; }
 
-    [CascadingParameter]
-    public HttpContext? HttpContext { get; set; }
+	[CascadingParameter]
+	public HttpContext? HttpContext { get; set; }
 
-    protected override async Task OnInitializedAsync()
-    {
-        var returnUrl = ReturnUrl ?? "/";
-        var url = new Uri(returnUrl, UriKind.RelativeOrAbsolute);
-        Nav.NavigateTo(url.IsAbsoluteUri ? "/" : returnUrl);
-        await base.OnInitializedAsync();
-    }
+	protected override async Task OnInitializedAsync()
+	{
+		//var returnUrl = ReturnUrl ?? "/";
+		//var url = new Uri(returnUrl, UriKind.RelativeOrAbsolute);
+		//Nav.NavigateTo(url.IsAbsoluteUri ? "/" : returnUrl);
+		//await base.OnInitializedAsync();
 
-    public static string Url(NavigationManager nav)
-        => $"user/login?returnUrl={Uri.EscapeDataString(nav.ToBaseRelativePath(nav.Uri))}";
+		// If ReturnUrl is null or empty, default to "/"
+		var returnUrl = string.IsNullOrEmpty(ReturnUrl) ? "/" : ReturnUrl;
+
+		// Ensure the returnUrl is a valid relative URL (i.e., starts with "/")
+		Uri? uriResult = null;
+		bool isRelative = Uri.TryCreate(returnUrl, UriKind.Relative, out uriResult) && uriResult?.IsAbsoluteUri == false;
+
+		// If it's not a valid relative URL, default to home page "/"
+		if (!isRelative || returnUrl.StartsWith("/user/login"))
+		{
+			returnUrl = "/";
+		}
+
+		// Check if the returnUrl is the same as the current URL (avoid redirecting back to login page)
+		//var currentUrl = Nav.Uri;
+		//if (returnUrl == currentUrl || returnUrl.StartsWith("/user/login"))
+		//{
+		//	// Don't navigate if the returnUrl is the same as the current URL
+		//	returnUrl = "/";
+		//}
+
+		// Debug log the final returnUrl
+		Console.WriteLine($"Final ReturnUrl: {returnUrl}");
+
+		try
+		{
+			// Ensure the user isn't redirected back to login
+			if (Nav.Uri.Contains("/user/login"))
+			{
+				// Avoid redirecting back to login page if already on it
+				returnUrl = "/";
+			}
+
+			// Redirect to the determined returnUrl (home or the original page)
+			Nav.NavigateTo(returnUrl, forceLoad: true);
+		}
+		catch (NavigationException ex)
+		{
+			Console.WriteLine($"NavigationException caught: {ex.Message}");
+			// Handle the exception or debug the details
+		}
+
+		await base.OnInitializedAsync();
+	}
+
+	//public static string Url(NavigationManager nav)
+	//=> $"user/login?returnUrl={Uri.EscapeDataString(nav.ToBaseRelativePath(nav.Uri))}";
+
+	public static string Url(NavigationManager nav)
+	{
+		var returnUrl = nav.ToBaseRelativePath(nav.Uri);
+		// If we're already on the login page, don't add the returnUrl
+		if (returnUrl.Contains("/user/login"))
+		{
+			returnUrl = "/";
+		}
+		return $"user/login?returnUrl={Uri.EscapeDataString(returnUrl)}";
+		//return $"user/login";
+	}
 }

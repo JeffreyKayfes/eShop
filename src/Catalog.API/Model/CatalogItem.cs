@@ -44,6 +44,9 @@ public class CatalogItem
     /// </summary>
     public bool OnReorder { get; set; }
 
+    [MaxLength(10)]
+    public string Gender { get; set; }
+
     public CatalogItem() { }
 
 
