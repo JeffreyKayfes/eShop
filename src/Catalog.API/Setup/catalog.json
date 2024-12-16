@@ -899,13 +899,49 @@
     "Price": 79.99,
     "Gender": "Unisex"
   },
-  {
-    "Id": 101,
-    "Type": "Footwear",
-    "Brand": "Raptor Elite",
-    "Name": "Trek Xtreme Hiking Shoes",
-    "Description": "The Trek Xtreme hiking shoes by Raptor Elite are built to endure any trail. With their durable leather upper and rugged rubber sole, they offer excellent traction and protection. These shoes come in a timeless brown color that adds a touch of style to your outdoor adventures.",
-    "Price": 135.99,
-    "Gender": "Unisex"
-  }
+    {
+        "Id": 101,
+        "Type": "Footwear",
+        "Brand": "Raptor Elite",
+        "Name": "Trek Xtreme Hiking Shoes",
+        "Description": "The Trek Xtreme hiking shoes by Raptor Elite are built to endure any trail. With their durable leather upper and rugged rubber sole, they offer excellent traction and protection. These shoes come in a timeless brown color that adds a touch of style to your outdoor adventures.",
+        "Price": 135.99,
+        "Gender": "Unisex"
+    },
+    {
+        "Id": 102,
+        "Type": "Jackets",
+        "Brand": "Legend",
+        "Name": "Snowboarding Jacket",
+        "Description": "Gear up for any snowboarding trip with the Legend Dune Snowboard Jacket. Available in light grey/black, this jacket offers ultimate protection with its waterproof and windproof shell. The breathable fabric and adjustable cuffs ensure comfort, allowing you to snowboard in any weather condition.",
+        "Price": 238.99,
+        "Gender": "Unisex"
+    },
+    {
+        "Id": 103,
+        "Type": "Ski/boarding",
+        "Brand": "Daybird",
+        "Name": "Sight Ski Goggles",
+        "Description": "Conquer the slopes in style with the Sight Ski Goggles by Daybird. Designed for maximum performance, these goggles feature a sleek white frame and mirrored, polarized lenses that reduce glare, enhancing your visibility. With a comfortable foam lining and adjustable strap, these goggles provide a secure and snug fit.",
+        "Price": 138.99,
+        "Gender": "Unisex"
+    },
+    {
+        "Id": 104,
+        "Type": "Ski/boarding",
+        "Brand": "Daybird",
+        "Name": "Iconic Snowboard Pants",
+        "Description": "Gear up for any snowboarding trip with the Daybird Iconic Snowboarding Pants. Available in grey camo, these pants offer ultimate protection with its waterproof and windproof shell. The breathable fabric and adjustable cuffs ensure comfort, allowing you to snowboard in any weather condition.",
+        "Price": 188.99,
+        "Gender": "Unisex"
+    },
+    {
+        "Id": 105,
+        "Type": "Ski/boarding",
+        "Brand": "Daybird",
+        "Name": "Cozy Hood Facemask",
+        "Description": "Gear up for any snowboarding trip with the Daybird Cozy Hood Facemask. Available in pink, this facemask offers ultimate protection with its waterproof and windproof shell. The breathable fabric ensures comfort, allowing you to snowboard in any weather condition.",
+        "Price": 28.99,
+        "Gender": "Unisex"
+    }
 ]
