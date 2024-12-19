@@ -21,6 +21,8 @@ public record Order
     public string Country { get; init; }
     public List<Orderitem> OrderItems { get; set; }
     public decimal Total { get; set; }
+    public decimal SalesTax { get; set; }
+    public decimal GrandTotal { get; set; }
 }
 
 public record OrderSummary
@@ -29,6 +31,8 @@ public record OrderSummary
     public DateTime Date { get; init; }
     public string Status { get; init; }
     public double Total { get; init; }
+    public double SalesTax { get; set; }
+    public double GrandTotal { get; set; }
 }
 
 public record CardType

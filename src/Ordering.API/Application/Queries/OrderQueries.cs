@@ -24,6 +24,8 @@ public class OrderQueries(OrderingContext context)
             Zipcode = order.Address.ZipCode,
             Status = order.OrderStatus.ToString(),
             Total = order.GetTotal(),
+            SalesTax = order.GetSalesTax(),
+            GrandTotal = order.GetGrandTotal(),
             OrderItems = order.OrderItems.Select(oi => new Orderitem
             {
                 ProductName = oi.ProductName,
@@ -43,7 +45,9 @@ public class OrderQueries(OrderingContext context)
                 OrderNumber = o.Id,
                 Date = o.OrderDate,
                 Status = o.OrderStatus.ToString(),
-                Total =(double) o.OrderItems.Sum(oi => oi.UnitPrice* oi.Units)
+                Total =(double) o.OrderItems.Sum(oi => oi.UnitPrice* oi.Units),
+                SalesTax = (double)o.GetSalesTax(),
+                GrandTotal = (double)o.GetGrandTotal()
             })
             .ToListAsync();
     } 

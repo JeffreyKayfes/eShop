@@ -175,4 +175,45 @@ public class OrderAggregateTest
         //Assert
         Assert.AreEqual(fakeOrder.DomainEvents.Count, expectedResult);
     }
+
+    [TestMethod]
+    public void when_add_two_items_then_the_sales_tax_should_be_calculated_correctly()
+    {
+        // Arrange
+        var address = new AddressBuilder().Build();
+        var order = new OrderBuilder(address)
+            .AddOne(1, "item1", 10.0m, 0, string.Empty)
+            .AddOne(2, "item2", 20.0m, 0, string.Empty)
+            .Build();
+
+        const decimal taxRate = 0.065m; // 6.5% tax rate
+        var expectedSalesTax = (10.0m + 20.0m) * taxRate;
+
+        // Act
+        var actualSalesTax = order.GetSalesTax();
+
+        // Assert
+        Assert.AreEqual(expectedSalesTax, actualSalesTax);
+    }
+
+    [TestMethod]
+    public void when_add_two_items_then_the_grand_total_should_be_calculated_correctly()
+    {
+        // Arrange
+        var address = new AddressBuilder().Build();
+        var order = new OrderBuilder(address)
+            .AddOne(1, "item1", 10.0m, 0, string.Empty)
+            .AddOne(2, "item2", 20.0m, 0, string.Empty)
+            .Build();
+
+        const decimal taxRate = 0.065m; // 6.5% tax rate
+        var total = 10.0m + 20.0m;
+        var expectedGrandTotal = total + (total * taxRate);
+
+        // Act
+        var actualGrandTotal = order.GetGrandTotal();
+
+        // Assert
+        Assert.AreEqual(expectedGrandTotal, actualGrandTotal);
+    }
 }

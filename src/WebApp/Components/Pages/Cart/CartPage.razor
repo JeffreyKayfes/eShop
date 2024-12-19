@@ -70,6 +70,14 @@
                     <div>Total</div>
                     <div>$@TotalPrice?.ToString("0.00")</div>
                 </div>
+				<div class="cart-summary-sales-tax">
+					<div>Sales Tax (6.5%)</div>
+					<div>$@SalesTax?.ToString("0.00")</div>
+				</div>
+				<div class="cart-summary-grand-total">
+					<div>Grand Total</div>
+					<div><strong>$@GrandTotal?.ToString("0.00")</strong></div>
+				</div>
                 <a href="checkout" class="button button-primary">Check out</a>
                 <a href="" class="cart-summary-link">
                     <img role="presentation" src="icons/arrow-left.svg" />
@@ -84,6 +92,11 @@
 
 @code {
     private IReadOnlyCollection<BasketItem>? basketItems;
+
+	private const decimal SalesTaxRate = 0.065m;
+
+	private decimal? SalesTax => TotalPrice.HasValue ? TotalPrice.Value * SalesTaxRate : null;
+	private decimal? GrandTotal => TotalPrice.HasValue ? TotalPrice.Value + SalesTax : null;
 
     [SupplyParameterFromForm]
     public int? UpdateQuantityId { get; set; }
